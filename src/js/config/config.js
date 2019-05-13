@@ -12,6 +12,10 @@ window.__DATA__ = [
     refinements: [
       { name: 'Foo', value: 'foo' },
       { name: 'Bar', value: 'bar' },
+    ],
+  },
+  {
+    refinements: [
       { name: 'Baz', value: 'baz' },
       { name: 'Quux', value: 'quux' },
     ],
