@@ -24,9 +24,10 @@
       const elem = document.createElement('aside');
       this._data.forEach(({ navigationName, refinements }) => {
         const navElem = document.createElement('nav');
-        const headerElem = document.createElement('header');
-        const headingElem = document.createElement('h1');
         const listElem = document.createElement('ul');
+
+        const headerElem = document.createElement('my-navigation-header');
+        headerElem.setAttribute('name', navigationName);
 
         refinements.forEach(({ name, value }) => {
           // Create elements.
@@ -52,8 +53,6 @@
           listElem.appendChild(listItemElem);
         });
 
-        headingElem.innerText = navigationName;
-        headerElem.appendChild(headingElem);
         navElem.appendChild(headerElem);
         navElem.appendChild(listElem);
         elem.appendChild(navElem);

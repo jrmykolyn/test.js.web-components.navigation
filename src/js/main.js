@@ -1,5 +1,6 @@
 window.addEventListener('DOMContentLoaded', () => {
   window.customElements.define('my-navigation', window.__COMPONENTS__.Navigation);
+  window.customElements.define('my-navigation-header', window.__COMPONENTS__.NavigationHeader);
 
   const targetElem = document.getElementById('target');
   const navigationElem = document.querySelector('my-navigation');
