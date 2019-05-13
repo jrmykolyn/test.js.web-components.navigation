@@ -25,14 +25,24 @@ window.addEventListener('DOMContentLoaded', () => {
     constructor() {
       super();
 
+      this.root = this.attachShadow({ mode: 'open' });
+
       // Bind.
       this.handleRefinementClick = this.handleRefinementClick.bind(this);
+    }
 
-      this.data = __DATA__;
-      const root = this.attachShadow({ mode: 'open' });
+    set data(val) {
+      this._data = val;
+      this.render();
+    }
 
+    render() {
+      // Clear current DOM.
+      this.root.innerHTML = '';
+
+      // Build and inject new DOM elems.
       const elem = document.createElement('aside');
-      this.data.forEach(({ refinements }) => {
+      this._data.forEach(({ refinements }) => {
         const listElem = document.createElement('ul');
 
         refinements.forEach(({ name, value }) => {
@@ -62,7 +72,7 @@ window.addEventListener('DOMContentLoaded', () => {
         elem.appendChild(listElem);
       });
 
-      root.appendChild(elem);
+      this.root.appendChild(elem);
     }
 
     handleRefinementClick(e) {
@@ -78,6 +88,8 @@ window.addEventListener('DOMContentLoaded', () => {
   }
 
   window.customElements.define('my-navigation', Navigation);
+  const navigationElem = document.querySelector('my-navigation');
+  navigationElem.data = __DATA__;
 
   // Register global event listeners.
   window.addEventListener(__EVENTS__.REFINEMENT_SELECTED, ({ detail: { refinementValue: value } }) => {
