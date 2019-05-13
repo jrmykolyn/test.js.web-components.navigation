@@ -9,12 +9,16 @@ window. __EVENTS__ = {
 
 window.__DATA__ = [
   {
+    navigationName: 'Navigation A',
+    navigationSlug: 'navigation-a',
     refinements: [
       { name: 'Foo', value: 'foo' },
       { name: 'Bar', value: 'bar' },
     ],
   },
   {
+    navigationName: 'Navigation B',
+    navigationSlug: 'navigation-b',
     refinements: [
       { name: 'Baz', value: 'baz' },
       { name: 'Quux', value: 'quux' },
