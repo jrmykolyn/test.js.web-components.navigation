@@ -1,3 +1,7 @@
+const __STATE__ = {
+  selectedRefinements: new Set(),
+};
+
 const __EVENTS__ = {
   REFINEMENT_SELECTED: 'refinementSelected',
   REFINEMENT_DESELECTED: 'refinementDeselected',
@@ -15,6 +19,8 @@ const __DATA__ = [
 ];
 
 window.addEventListener('DOMContentLoaded', () => {
+  const targetElem = document.getElementById('target');
+
   class Navigation extends HTMLElement {
     constructor() {
       super();
@@ -40,6 +46,8 @@ window.addEventListener('DOMContentLoaded', () => {
           labelElem.innerText = name;
           labelElem.setAttribute('for', id);
           checkBoxElem.setAttribute('type', 'checkbox');
+          checkBoxElem.dataset.refinementName = name;
+          checkBoxElem.dataset.refinementValue = value;
           checkBoxElem.id = id;
 
           // Bind event handlers.
@@ -58,9 +66,10 @@ window.addEventListener('DOMContentLoaded', () => {
     }
 
     handleRefinementClick(e) {
+      const data = e.target.dataset;
       e.target.checked
-        ? this.emit(__EVENTS__.REFINEMENT_SELECTED)
-        : this.emit(__EVENTS__.REFINEMENT_DESELECTED);
+        ? this.emit(__EVENTS__.REFINEMENT_SELECTED, data)
+        : this.emit(__EVENTS__.REFINEMENT_DESELECTED, data);
     }
 
     emit(eventName, payload) {
@@ -70,11 +79,14 @@ window.addEventListener('DOMContentLoaded', () => {
 
   window.customElements.define('my-navigation', Navigation);
 
-  window.addEventListener(__EVENTS__.REFINEMENT_SELECTED, (e) => {
-    console.log('__ RECEIVED `REFINEMENT_SELECTED` EVENT', e);
+  // Register global event listeners.
+  window.addEventListener(__EVENTS__.REFINEMENT_SELECTED, ({ detail: { refinementValue: value } }) => {
+    __STATE__.selectedRefinements.add(value);
+    target.innerHTML = [...__STATE__.selectedRefinements.values()].join(', ');
   });
 
-  window.addEventListener(__EVENTS__.REFINEMENT_DESELECTED, (e) => {
-    console.log('__ RECEIVED `REFINEMENT_DESELECTED` EVENT', e);
+  window.addEventListener(__EVENTS__.REFINEMENT_DESELECTED, ({ detail: { refinementValue: value } }) => {
+    __STATE__.selectedRefinements.delete(value);
+    target.innerHTML = [...__STATE__.selectedRefinements.values()].join(', ');
   });
 });
