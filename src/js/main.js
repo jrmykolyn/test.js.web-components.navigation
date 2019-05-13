@@ -1,10 +1,11 @@
 window.addEventListener('DOMContentLoaded', () => {
   window.customElements.define('my-navigation', window.__COMPONENTS__.Navigation);
   window.customElements.define('my-navigation-header', window.__COMPONENTS__.NavigationHeader);
+  window.customElements.define('my-navigation-list', window.__COMPONENTS__.NavigationList);
 
   const targetElem = document.getElementById('target');
   const navigationElem = document.querySelector('my-navigation');
-  navigationElem.data = window.__DATA__;
+  navigationElem.set('data', window.__DATA__);
 
   const handleEvent = (eventType) => {
     return ({ detail: { refinementValue: value }}) => {
