@@ -1,4 +1,18 @@
 (() => {
+  const template = document.createElement('template');
+
+  template.innerHTML = `
+    <style>
+      :host {
+        display: block;
+      }
+
+      li {
+        margin-bottom: 0.8rem;
+      }
+    </style>
+  `;
+
   window.__COMPONENTS__ = window.__COMPONENTS__ || {};
 
   window.__COMPONENTS__.NavigationListItem = class NavigationListItem extends window.__CORE__.MyEmitterComponent {
@@ -10,6 +24,9 @@
       super();
 
       this.root = this.attachShadow({ mode: 'open' });
+      this.node = document.createElement('li');
+      this.root.appendChild(template.content.cloneNode(true));
+      this.root.appendChild(this.node);
 
       // Bind.
       this.handleRefinementClick = this.handleRefinementClick.bind(this);
@@ -24,9 +41,7 @@
     }
 
     render() {
-      this.root.innerHTML = '';
-
-      this.listItem = document.createElement('li');
+      this.node.innerHTML = '';
 
       const id = Math.random().toString().substring(3);
       const labelElem = document.createElement('label');
@@ -40,9 +55,8 @@
       // Bind event handlers.
       checkBoxElem.addEventListener('click', this.handleRefinementClick);
 
-      this.listItem.appendChild(checkBoxElem);
-      this.listItem.appendChild(labelElem);
-      this.root.appendChild(this.listItem);
+      this.node.appendChild(checkBoxElem);
+      this.node.appendChild(labelElem);
     }
 
     handleRefinementClick(e) {
