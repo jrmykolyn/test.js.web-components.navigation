@@ -21,9 +21,12 @@ window.addEventListener('DOMContentLoaded', () => {
       const elem = document.createElement('div');
       elem.refinements = refinements;
       const titleElem = document.createElement('p');
+      const refinementsElem = document.createElement('span');
       titleElem.innerText = name;
+      refinementsElem.innerText = refinements.join(', ');
 
       elem.appendChild(titleElem);
+      elem.appendChild(refinementsElem);
       target.appendChild(elem);
     });
   };
