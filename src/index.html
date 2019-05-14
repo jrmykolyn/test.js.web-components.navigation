@@ -18,11 +18,29 @@
         font-size: 1.6rem;
         font-family: Helvetica, sans-serif;
       }
+
+      #container {
+        display: flex;
+        justify-content: space-between;
+        padding: 3rem;
+      }
+
+      #nav {
+        flex: 0 1 30%;
+      }
+
+      #target {
+        flex: 1 1 auto;
+      }
     </style>
   </head>
   <body>
-    <my-navigation></my-navigation>
-    <div id="target"></div>
+    <section id="container">
+      <aside id="nav">
+        <my-navigation></my-navigation>
+      </aside>
+      <main id="target"></main>
+    </section>
     <script src="js/utils/index.js"></script>
     <script src="js/config/config.js"></script>
     <script src="js/core/component.js"></script>
