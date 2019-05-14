@@ -2,9 +2,9 @@
   window.__CORE__ = window.__CORE__ || {};
 
   window.__CORE__.MyComponent = class MyComponent extends HTMLElement {
-    set(property, value) {
+    set(property, value, shouldRender = true) {
       this[property] = value;
-      this.render();
+      if (shouldRender) this.render();
     }
 
     attrToProp(str) {
