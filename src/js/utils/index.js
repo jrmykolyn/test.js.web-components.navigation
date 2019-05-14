@@ -33,8 +33,19 @@
     return new Array(count).fill(null).map(() => getRandomRefinement(length));
   };
 
+  const getRandomProducts = (refinements, count = 10) => {
+    return new Array(count).fill(null)
+      .map((_, i) => {
+        return {
+          name: `Product ${i}`,
+          refinements: new Array(getRandomNumber(2, 6)).fill(null).map(() => refinements[getRandomNumber(0, refinements.length - 1)]),
+        };
+      });
+  };
+
   window.__UTILS__ = window.__UTILS__ || {
     getRandomNumber,
+    getRandomProducts,
     getRandomRefinement,
     getRandomRefinements,
   };
