@@ -41,7 +41,9 @@ window.addEventListener('DOMContentLoaded', () => {
 
       // Handle products.
       const selectedRefinements = [...window.__STATE__.selectedRefinements.values()];
-      const filteredProducts = products.filter(({ refinements }) => refinements.some((r) => selectedRefinements.includes(r)))
+      const filteredProducts = selectedRefinements.length
+        ? products.filter(({ refinements }) => refinements.some((r) => selectedRefinements.includes(r)))
+        : products;
       targetElem.innerHTML = '';
       renderProducts(filteredProducts, targetElem);
     };
