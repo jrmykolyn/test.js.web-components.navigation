@@ -2,6 +2,7 @@ window.addEventListener('DOMContentLoaded', () => {
   window.customElements.define('my-navigation', window.__COMPONENTS__.Navigation);
   window.customElements.define('my-navigation-header', window.__COMPONENTS__.NavigationHeader);
   window.customElements.define('my-navigation-list', window.__COMPONENTS__.NavigationList);
+  window.customElements.define('my-navigation-list-item', window.__COMPONENTS__.NavigationListItem);
 
   const targetElem = document.getElementById('target');
   const navigationElem = document.querySelector('my-navigation');
