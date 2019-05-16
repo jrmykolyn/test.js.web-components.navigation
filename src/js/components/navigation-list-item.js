@@ -11,7 +11,9 @@
         margin-bottom: 0.8rem;
       }
     </style>
-    <slot name="content"></slot>
+    <slot name="content">
+      <li></li>
+    </slot>
   `;
 
   window.__COMPONENTS__ = window.__COMPONENTS__ || {};
@@ -43,9 +45,12 @@
     }
 
     render() {
+      if (this.hasInnerHTML()) return;
+
       this.slots.content.innerHTML = '';
 
       const id = Math.random().toString().substring(3);
+      const listItemElem = document.createElement('li');
       const labelElem = document.createElement('label');
       const checkBoxElem = document.createElement('input');
 
@@ -57,8 +62,9 @@
       // Bind event handlers.
       checkBoxElem.addEventListener('click', this.handleRefinementClick);
 
-      this.slots.content.appendChild(checkBoxElem);
-      this.slots.content.appendChild(labelElem);
+      listItemElem.appendChild(checkBoxElem);
+      listItemElem.appendChild(labelElem);
+      this.slots.content.appendChild(listItemElem);
     }
 
     handleRefinementClick(e) {
