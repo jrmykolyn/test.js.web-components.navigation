@@ -2,6 +2,17 @@
   window.__CORE__ = window.__CORE__ || {};
 
   window.__CORE__.MyComponent = class MyComponent extends HTMLElement {
+    getSlots() {
+      const slots = this.root.querySelectorAll('slot') || [];
+      return [...slots].reduce((acc, node) => {
+        const key = node.getAttribute('name');
+        return {
+          ...acc,
+          [key]: node,
+        };
+      }, {});
+    }
+
     set(property, value, shouldRender = true) {
       this[property] = value;
       if (shouldRender) this.render();
