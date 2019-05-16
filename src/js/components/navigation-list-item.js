@@ -11,6 +11,7 @@
         margin-bottom: 0.8rem;
       }
     </style>
+    <slot name="content"></slot>
   `;
 
   window.__COMPONENTS__ = window.__COMPONENTS__ || {};
@@ -24,9 +25,10 @@
       super();
 
       this.root = this.attachShadow({ mode: 'open' });
-      this.node = document.createElement('li');
       this.root.appendChild(template.content.cloneNode(true));
-      this.root.appendChild(this.node);
+      this.slots = this.getSlots();
+      this.node = document.createElement('li');
+      this.slots.content.appendChild(this.node);
 
       // Bind.
       this.handleRefinementClick = this.handleRefinementClick.bind(this);
@@ -41,7 +43,7 @@
     }
 
     render() {
-      this.node.innerHTML = '';
+      this.slots.content.innerHTML = '';
 
       const id = Math.random().toString().substring(3);
       const labelElem = document.createElement('label');
@@ -55,8 +57,8 @@
       // Bind event handlers.
       checkBoxElem.addEventListener('click', this.handleRefinementClick);
 
-      this.node.appendChild(checkBoxElem);
-      this.node.appendChild(labelElem);
+      this.slots.content.appendChild(checkBoxElem);
+      this.slots.content.appendChild(labelElem);
     }
 
     handleRefinementClick(e) {
