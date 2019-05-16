@@ -17,6 +17,11 @@
       return !!this.innerHTML;
     }
 
+    hasSlotContent(name) {
+      return this.children.length
+        && [...this.children].some((n) => n.getAttribute('slot') === name);
+    }
+
     set(property, value, shouldRender = true) {
       this[property] = value;
       if (shouldRender) this.render();
