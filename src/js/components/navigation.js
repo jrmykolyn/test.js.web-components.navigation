@@ -31,6 +31,10 @@
       this.slots = this.getSlots();
     }
 
+    connectedCallback() {
+      this.render();
+    }
+
     render() {
       if (this.hasSlotContent('content')) return;
       this.renderHeader();
