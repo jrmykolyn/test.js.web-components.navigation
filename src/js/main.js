@@ -47,8 +47,8 @@ window.addEventListener('DOMContentLoaded', () => {
   const products = window.__UTILS__.getRandomProducts(refinements, 20);
 
   const targetElem = document.getElementById('target');
-  const navigationElem = document.querySelector('my-navigation');
-  navigationElem.set('data', window.__DATA__[0]);
+  const navigationsElem = document.querySelector('my-navigations');
+  navigationsElem.set('data', window.__DATA__);
 
   renderProducts(products, targetElem);
 
