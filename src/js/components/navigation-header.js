@@ -12,6 +12,7 @@
         margin-bottom: 1.5rem;
       }
     </style>
+    <slot name="content"></slot>
   `;
 
   window.__COMPONENTS__ = window.__COMPONENTS__ || {};
@@ -25,9 +26,10 @@
       super();
 
       this.root = this.attachShadow({ mode: 'open' });
-      this.node = document.createElement('header');
       this.root.appendChild(template.content.cloneNode(true));
-      this.root.appendChild(this.node);
+      this.slots = this.getSlots();
+      this.node = document.createElement('header');
+      this.slots.content.appendChild(this.node);
     }
 
     connectedCallback() {
@@ -39,11 +41,11 @@
     }
 
     render() {
-      this.node.innerHTML = '';
+      this.slots.content.innerHTML = '';
 
       this.heading = document.createElement('h1');
       this.heading.innerText = this.navigationName;
-      this.node.appendChild(this.heading);
+      this.slots.content.appendChild(this.heading);
     }
   }
 })();
