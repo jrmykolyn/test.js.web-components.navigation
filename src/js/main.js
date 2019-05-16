@@ -5,17 +5,6 @@ window.addEventListener('DOMContentLoaded', () => {
   window.customElements.define('my-navigation-list', window.__COMPONENTS__.NavigationList);
   window.customElements.define('my-navigation-list-item', window.__COMPONENTS__.NavigationListItem);
 
-  const targetElem = document.getElementById('target');
-  const navigationElem = document.querySelector('my-navigation');
-  navigationElem.set('data', window.__DATA__);
-
-  const refinements = window.__DATA__
-    .map(({ refinements }) => refinements)
-    .reduce((acc, arr) => [...acc, ...arr], [])
-    .map(({ value }) => value);
-
-  const products = window.__UTILS__.getRandomProducts(refinements, 20);
-
   const renderProducts = (products, target) => {
     products.forEach(({ name, refinements }) => {
       const elem = document.createElement('div');
@@ -48,6 +37,17 @@ window.addEventListener('DOMContentLoaded', () => {
       renderProducts(filteredProducts, targetElem);
     };
   };
+
+  const refinements = window.__DATA__
+    .map(({ refinements }) => refinements)
+    .reduce((acc, arr) => [...acc, ...arr], [])
+    .map(({ value }) => value);
+
+  const products = window.__UTILS__.getRandomProducts(refinements, 20);
+
+  const targetElem = document.getElementById('target');
+  const navigationElem = document.querySelector('my-navigation');
+  navigationElem.set('data', window.__DATA__);
 
   renderProducts(products, targetElem);
 
