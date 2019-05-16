@@ -1,5 +1,6 @@
 window.addEventListener('DOMContentLoaded', () => {
   // Register custom elements.
+  window.customElements.define('my-navigations', window.__COMPONENTS__.Navigations);
   window.customElements.define('my-navigation', window.__COMPONENTS__.Navigation);
   window.customElements.define('my-navigation-header', window.__COMPONENTS__.NavigationHeader);
   window.customElements.define('my-navigation-list', window.__COMPONENTS__.NavigationList);
