@@ -12,6 +12,7 @@
         padding: 0 2rem;
       }
     </style>
+    <slot name="content"></slot>
   `;
 
   window.__COMPONENTS__ = window.__COMPONENTS__ || {};
@@ -21,13 +22,14 @@
       super();
 
       this.root = this.attachShadow({ mode: 'open' });
-      this.node = document.createElement('aside');
       this.root.appendChild(template.content.cloneNode(true));
-      this.root.appendChild(this.node);
+      this.slots = this.getSlots();
+      this.node = document.createElement('aside');
+      this.slots.content.appendChild(this.node);
     }
 
     render() {
-      this.node.innerHTML = '';
+      this.slots.content.innerHTML = '';
 
       this.data.forEach(({ navigationName, refinements }) => {
         const navElem = document.createElement('nav');
@@ -39,7 +41,7 @@
         navElem.appendChild(headerElem);
         navElem.appendChild(listElem);
 
-        this.node.appendChild(navElem);
+        this.slots.content.appendChild(navElem);
       });
     }
   }
