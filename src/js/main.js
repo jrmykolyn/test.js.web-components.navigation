@@ -47,7 +47,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
   const targetElem = document.getElementById('target');
   const navigationElem = document.querySelector('my-navigation');
-  navigationElem.set('data', window.__DATA__);
+  navigationElem.set('data', window.__DATA__[0]);
 
   renderProducts(products, targetElem);
 

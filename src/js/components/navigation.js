@@ -13,7 +13,10 @@
       }
     </style>
     <slot name="content">
-      <aside></aside>
+      <nav>
+        <slot name="header"></slot>
+        <slot name="list"></slot>
+      </nav>
     </slot>
   `;
 
@@ -29,25 +32,31 @@
     }
 
     render() {
-      if (this.hasInnerHTML()) return;
+      if (this.hasSlotContent('content')) return;
+      this.renderHeader();
+      this.renderList();
+    }
 
-      this.slots.content.innerHTML = '';
+    renderHeader() {
+      if (this.hasSlotContent('header')) return;
 
-      const asideElem = document.createElement('aside');
+      const { navigationName } = this.data;
 
-      this.data.forEach(({ navigationName, refinements }) => {
-        const navElem = document.createElement('nav');
-        const headerElem = document.createElement('my-navigation-header');
-        headerElem.setAttribute('navigation-name', navigationName);
-        const listElem = document.createElement('my-navigation-list');
-        listElem.set('refinements', refinements);
+      const headerElem = document.createElement('my-navigation-header');
+      headerElem.setAttribute('navigation-name', navigationName);
 
-        navElem.appendChild(headerElem);
-        navElem.appendChild(listElem);
-        asideElem.appendChild(navElem);
-      });
+      this.slots.header.appendChild(headerElem);
+    }
 
-      this.slots.content.appendChild(asideElem);
+    renderList() {
+      if (this.hasSlotContent('list')) return;
+
+      const { refinements } = this.data;
+
+      const listElem = document.createElement('my-navigation-list');
+      listElem.set('refinements', refinements);
+
+      this.slots.list.appendChild(listElem);
     }
   }
 })();
