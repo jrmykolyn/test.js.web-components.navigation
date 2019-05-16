@@ -12,7 +12,9 @@
         padding: 0 2rem;
       }
     </style>
-    <slot name="content"></slot>
+    <slot name="content">
+      <aside></aside>
+    </slot>
   `;
 
   window.__COMPONENTS__ = window.__COMPONENTS__ || {};
@@ -24,12 +26,14 @@
       this.root = this.attachShadow({ mode: 'open' });
       this.root.appendChild(template.content.cloneNode(true));
       this.slots = this.getSlots();
-      this.node = document.createElement('aside');
-      this.slots.content.appendChild(this.node);
     }
 
     render() {
+      if (this.hasInnerHTML()) return;
+
       this.slots.content.innerHTML = '';
+
+      const asideElem = document.createElement('aside');
 
       this.data.forEach(({ navigationName, refinements }) => {
         const navElem = document.createElement('nav');
@@ -40,9 +44,10 @@
 
         navElem.appendChild(headerElem);
         navElem.appendChild(listElem);
-
-        this.slots.content.appendChild(navElem);
+        asideElem.appendChild(navElem);
       });
+
+      this.slots.content.appendChild(asideElem);
     }
   }
 })();
