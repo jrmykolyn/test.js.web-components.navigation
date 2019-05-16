@@ -3,6 +3,10 @@
   <head>
     <title>Test - JS - Web Components - Navigation</title>
     <style>
+      *, *::before, *::after {
+        box-sizing: border-box;
+      }
+
       html, body {
         margin: 0;
         padding: 0;
@@ -22,6 +26,7 @@
       #container {
         display: flex;
         justify-content: flex-start;
+        align-items: flex-start;
         padding: 3rem;
       }
 
@@ -29,6 +34,9 @@
         flex: 0 0 30%;
         max-width: 32rem;
         margin-right: 4rem;
+        background: #82ccdd;
+        border: solid 0.5rem #3c6382;
+        padding: 3rem 1rem;
       }
 
       #target {
@@ -40,6 +48,7 @@
         box-shadow: 0 0.3rem 3rem -0.5rem rgba(0, 0, 0, 0.3);
         margin-bottom: 2rem;
         padding: 2rem;
+        opacity: 0.5;
       }
 
       #target > div p {
