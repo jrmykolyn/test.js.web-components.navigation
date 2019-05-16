@@ -13,7 +13,9 @@
         padding: 0;
       }
     </style>
-    <slot name="content"></slot>
+    <slot name="content">
+      <ul></ul>
+    </slot>
   `;
 
   window.__COMPONENTS__ = window.__COMPONENTS__ || {};
@@ -25,20 +27,24 @@
       this.root = this.attachShadow({ mode: 'open' });
       this.root.appendChild(template.content.cloneNode(true));
       this.slots = this.getSlots();
-      this.node = document.createElement('ul');
-      this.slots.content.appendChild(this.node);
     }
 
     render() {
+      if (this.hasInnerHTML()) return;
+
       this.slots.content.innerHTML = '';
+
+      const listElem = document.createElement('ul');
 
       this.refinements.forEach(({ name, value }) => {
         const listItemElem = document.createElement('my-navigation-list-item');
         listItemElem.setAttribute('refinement-name', name);
         listItemElem.setAttribute('refinement-value', value);
 
-        this.slots.content.appendChild(listItemElem);
+        listElem.appendChild(listItemElem);
       });
+
+      this.slots.content.appendChild(listElem);
     }
   }
 })();
