@@ -12,7 +12,9 @@
         margin-bottom: 1.5rem;
       }
     </style>
-    <slot name="content"></slot>
+    <slot name="content">
+      <header></header>
+    </slot>
   `;
 
   window.__COMPONENTS__ = window.__COMPONENTS__ || {};
@@ -28,8 +30,6 @@
       this.root = this.attachShadow({ mode: 'open' });
       this.root.appendChild(template.content.cloneNode(true));
       this.slots = this.getSlots();
-      this.node = document.createElement('header');
-      this.slots.content.appendChild(this.node);
     }
 
     connectedCallback() {
@@ -41,11 +41,16 @@
     }
 
     render() {
+      if (this.hasInnerHTML()) return;
+
       this.slots.content.innerHTML = '';
 
-      this.heading = document.createElement('h1');
-      this.heading.innerText = this.navigationName;
-      this.slots.content.appendChild(this.heading);
+      const headerElem = document.createElement('header');
+      const headingElem = document.createElement('h1');
+      headingElem.innerText = this.navigationName;
+
+      headerElem.appendChild(headingElem);
+      this.slots.content.appendChild(headerElem);
     }
   }
 })();
