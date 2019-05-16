@@ -13,6 +13,10 @@
       }, {});
     }
 
+    hasInnerHTML() {
+      return !!this.innerHTML;
+    }
+
     set(property, value, shouldRender = true) {
       this[property] = value;
       if (shouldRender) this.render();
