@@ -6,6 +6,14 @@ window.customElements.define('my-navigation-list', window.__COMPONENTS__.Navigat
 window.customElements.define('my-navigation-list-item', window.__COMPONENTS__.NavigationListItem);
 
 window.addEventListener('DOMContentLoaded', () => {
+  // Declare functions.
+  /**
+   * Generate a collection product elements using the data provided;
+   * injected the resulting elements into the target node.
+   *
+   * @param {Object[]} products
+   * @param {HTMLElement} target
+   */
   const renderProducts = (products, target) => {
     products.forEach(({ name, refinements }) => {
       const elem = document.createElement('div');
@@ -21,6 +29,17 @@ window.addEventListener('DOMContentLoaded', () => {
     });
   };
 
+  /**
+   * Return a function to handle events of a given type.
+   *
+   * Returned function will:
+   * - add or remove a given refinement from the selected refinements;
+   * - remove the existing product elements;
+   * - generate and render a new set of product elements.
+   *
+   * @param {string} eventType
+   * @return {Function}
+   */
   const handleEvent = (eventType) => {
     return ({ detail: { refinementValue: value }}) => {
       const method = eventType === 'deselected'
@@ -39,18 +58,19 @@ window.addEventListener('DOMContentLoaded', () => {
     };
   };
 
+  // Generate mock product data and render the corresponding elements.
+  const targetElem = document.getElementById('target');
   const refinements = window.__DATA__
     .map(({ refinements }) => refinements)
     .reduce((acc, arr) => [...acc, ...arr], [])
     .map(({ value }) => value);
-
   const products = window.__UTILS__.getRandomProducts(refinements, 20);
+  renderProducts(products, targetElem);
 
-  const targetElem = document.getElementById('target');
+  // Inject the navigation data into the Navigations component.
   const navigationsElem = document.querySelector('my-navigations');
   navigationsElem.set('data', window.__DATA__);
 
-  renderProducts(products, targetElem);
 
   // Register global event listeners.
   window.addEventListener(window.__EVENTS__.REFINEMENT_SELECTED, handleEvent('selected'));
