@@ -1,4 +1,4 @@
-(() => {
+((window, CORE, COMPONENTS) => {
   const template = document.createElement('template');
 
   template.innerHTML = `
@@ -16,9 +16,7 @@
     </slot>
   `;
 
-  window.__COMPONENTS__ = window.__COMPONENTS__ || {};
-
-  window.__COMPONENTS__.NavigationListItem = class NavigationListItem extends window.__CORE__.MyEmitterComponent {
+  COMPONENTS.NavigationListItem = class NavigationListItem extends CORE.MyEmitterComponent {
     static get observedAttributes() {
       return ['refinement-name', 'refinement-value'];
     }
@@ -76,4 +74,4 @@
         : this.emit(__EVENTS__.REFINEMENT_DESELECTED, data);
     }
   }
-})();
+})(window, window.__CORE__, (window.__COMPONENTS__ = window.__COMPONENTS__ || {}));

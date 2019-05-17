@@ -1,4 +1,4 @@
-(() => {
+((window, CORE, COMPONENTS) => {
   const template = document.createElement('template');
 
   template.innerHTML = `
@@ -17,9 +17,7 @@
     </slot>
   `;
 
-  window.__COMPONENTS__ = window.__COMPONENTS__ || {};
-
-  window.__COMPONENTS__.NavigationHeader = class NavigationHeader extends window.__CORE__.MyEmitterComponent {
+  COMPONENTS.NavigationHeader = class NavigationHeader extends CORE.MyEmitterComponent {
     static get observedAttributes() {
       return ['navigation-name'];
     }
@@ -53,4 +51,4 @@
       this.slots.content.appendChild(headerElem);
     }
   }
-})();
+})(window, window.__CORE__, (window.__COMPONENTS__ = window.__COMPONENTS__ || {}));

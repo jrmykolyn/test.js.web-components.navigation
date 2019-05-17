@@ -1,4 +1,4 @@
-(() => {
+((window, CORE, COMPONENTS) => {
   const template = document.createElement('template');
 
   template.innerHTML = `
@@ -20,9 +20,7 @@
     </slot>
   `;
 
-  window.__COMPONENTS__ = window.__COMPONENTS__ || {};
-
-  window.__COMPONENTS__.Navigation = class Navigation extends window.__CORE__.MyEmitterComponent {
+  COMPONENTS.Navigation = class Navigation extends CORE.MyEmitterComponent {
     constructor() {
       super();
 
@@ -63,4 +61,4 @@
       this.slots.list.appendChild(listElem);
     }
   }
-})();
+})(window, window.__CORE__, (window.__COMPONENTS__ = window.__COMPONENTS__ || {}));
