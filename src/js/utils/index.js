@@ -1,4 +1,4 @@
-(() => {
+((window, UTILS) => {
   const getRandomNumber = (min = 0, max = 1) => {
     const diff = max - min;
     return min + Math.round(Math.random() * diff);
@@ -43,10 +43,8 @@
       });
   };
 
-  window.__UTILS__ = window.__UTILS__ || {
-    getRandomNumber,
-    getRandomProducts,
-    getRandomRefinement,
-    getRandomRefinements,
-  };
-})();
+  UTILS.getRandomNumber = getRandomNumber;
+  UTILS.getRandomProducts = getRandomProducts;
+  UTILS.getRandomRefinement = getRandomRefinement;
+  UTILS.getRandomRefinements = getRandomRefinements;
+})(window, (window.__UTILS__ = window.__UTILS__ || {}));
