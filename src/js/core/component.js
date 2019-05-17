@@ -1,7 +1,6 @@
-(() => {
-  window.__CORE__ = window.__CORE__ || {};
+((window, CORE) => {
 
-  window.__CORE__.MyComponent = class MyComponent extends HTMLElement {
+  CORE.MyComponent = class MyComponent extends HTMLElement {
     getSlots() {
       const slots = this.root.querySelectorAll('slot') || [];
       return [...slots].reduce((acc, node) => {
@@ -33,4 +32,4 @@
         .join('');
     }
   }
-})();
+})(window, (window.__CORE__ = window.__CORE__ || {}));
