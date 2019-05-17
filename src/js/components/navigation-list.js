@@ -18,7 +18,7 @@
     </slot>
   `;
 
-  COMPONENTS.NavigationList = class NavigationList extends CORE.MyEmitterComponent {
+  COMPONENTS.NavigationList = class NavigationList extends CORE.MyComponent {
     constructor() {
       super();
 

@@ -16,7 +16,7 @@
     </slot>
   `;
 
-  COMPONENTS.NavigationListItem = class NavigationListItem extends CORE.MyEmitterComponent {
+  COMPONENTS.NavigationListItem = class NavigationListItem extends CORE.MyComponent {
     static get observedAttributes() {
       return ['refinement-name', 'refinement-value'];
     }

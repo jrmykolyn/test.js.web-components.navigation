@@ -1,6 +1,10 @@
 ((window, CORE) => {
 
   CORE.MyComponent = class MyComponent extends HTMLElement {
+    emit(eventName, payload) {
+      window.dispatchEvent(new CustomEvent(eventName, { detail: payload }));
+    }
+
     getSlots() {
       const slots = this.root.querySelectorAll('slot') || [];
       return [...slots].reduce((acc, node) => {

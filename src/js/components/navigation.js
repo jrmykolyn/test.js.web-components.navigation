@@ -20,7 +20,7 @@
     </slot>
   `;
 
-  COMPONENTS.Navigation = class Navigation extends CORE.MyEmitterComponent {
+  COMPONENTS.Navigation = class Navigation extends CORE.MyComponent {
     constructor() {
       super();
 

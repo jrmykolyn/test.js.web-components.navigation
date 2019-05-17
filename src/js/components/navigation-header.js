@@ -17,7 +17,7 @@
     </slot>
   `;
 
-  COMPONENTS.NavigationHeader = class NavigationHeader extends CORE.MyEmitterComponent {
+  COMPONENTS.NavigationHeader = class NavigationHeader extends CORE.MyComponent {
     static get observedAttributes() {
       return ['navigation-name'];
     }
