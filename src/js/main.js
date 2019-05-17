@@ -1,11 +1,11 @@
-window.addEventListener('DOMContentLoaded', () => {
-  // Register custom elements.
-  window.customElements.define('my-navigations', window.__COMPONENTS__.Navigations);
-  window.customElements.define('my-navigation', window.__COMPONENTS__.Navigation);
-  window.customElements.define('my-navigation-header', window.__COMPONENTS__.NavigationHeader);
-  window.customElements.define('my-navigation-list', window.__COMPONENTS__.NavigationList);
-  window.customElements.define('my-navigation-list-item', window.__COMPONENTS__.NavigationListItem);
+// Register custom elements.
+window.customElements.define('my-navigations', window.__COMPONENTS__.Navigations);
+window.customElements.define('my-navigation', window.__COMPONENTS__.Navigation);
+window.customElements.define('my-navigation-header', window.__COMPONENTS__.NavigationHeader);
+window.customElements.define('my-navigation-list', window.__COMPONENTS__.NavigationList);
+window.customElements.define('my-navigation-list-item', window.__COMPONENTS__.NavigationListItem);
 
+window.addEventListener('DOMContentLoaded', () => {
   const renderProducts = (products, target) => {
     products.forEach(({ name, refinements }) => {
       const elem = document.createElement('div');
